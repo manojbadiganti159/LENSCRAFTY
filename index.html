@@ -16,20 +16,26 @@ body{
     min-height:100vh;
     color:aliceblue;
 }
-
 header{
     background:black;
     color:rgb(221,206,36);
-    text-align:center;
-    padding:5px;
+    padding:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
 }
-
+.logo{
+    position:absolute;
+    left:15px;
+    width:140px;
+}
 nav{
     background:red;
     padding:10px;
     text-align:center;
+    display:none;
 }
-
 nav a{
     color:white;
     margin:15px;
@@ -37,24 +43,15 @@ nav a{
     font-weight:bold;
     cursor:pointer;
 }
-
-section{
-    padding:40px;
-    text-align:center;
-}
-
-h1,h2,h3{
-    font-family:'Playfair Display',serif;
-}
+section{padding:40px;text-align:center;}
+h1,h2,h3{font-family:'Playfair Display',serif;}
 
 .card{
-    width:220px;
-    height:140px;
+    width:220px;height:140px;
     color:white;
     background-size:cover;
     background-position:center;
-    padding:15px;
-    margin:10px;
+    padding:15px;margin:10px;
     display:inline-flex;
     align-items:flex-end;
     justify-content:center;
@@ -64,199 +61,151 @@ h1,h2,h3{
     border-radius:8px;
 }
 
-.service-details{
-    display:none;
-}
-
-.image-box{
-    position:relative;
-    display:inline-block;
-}
-
-img{
-    width:220px;
-    margin:10px;
-}
+.service-details{display:none;}
+.image-box{position:relative;display:inline-block;}
+img{width:220px;margin:10px;}
 
 .delete-btn{
     position:absolute;
-    top:5px;
-    right:5px;
-    background:red;
-    color:white;
+    top:5px;right:5px;
+    background:red;color:white;
     border:none;
     padding:3px 6px;
     cursor:pointer;
-    font-size:12px;
 }
 
 button{
-    background:black;
-    color:white;
+    background:black;color:white;
     padding:10px 20px;
-    border:none;
-    cursor:pointer;
+    border:none;cursor:pointer;
 }
 
-input,select{
-    padding:8px;
-    margin:5px;
-}
+input,select{padding:8px;margin:5px;}
 </style>
 </head>
 
 <body>
 
 <header>
+<img class="logo" src="lenslogo (1).png">
+<div>
 <h1>LENS CRAFTY</h1>
 <p>Capturing Your Beautiful Moments</p>
+</div>
 </header>
 
-<nav>
+<nav id="navbar">
 <a onclick="showPage('home')">Home</a>
 <a onclick="showPage('services')">Services</a>
 <a onclick="showPage('gallery')">Gallery</a>
 <a onclick="showPage('contact')">Contact</a>
-<a onclick="showPage('admin')">Admin</a>
+<a onclick="logout()">Logout</a>
 </nav>
+
+<!-- LOGIN -->
+<section id="loginPage">
+<h2>Login</h2>
+
+<select id="role">
+<option value="user">User</option>
+<option value="admin">Admin</option>
+</select><br>
+
+<input id="username" placeholder="Username"><br>
+<input id="password" type="password" placeholder="Password"><br><br>
+
+<button onclick="doLogin()">Login</button>
+</section>
 
 <section id="home">
 <h2>Welcome</h2>
-<p>
-We provide professional photography services like
-Pre Wedding, Post Wedding, Maternity, Outdoor, Reels and Half Saree shoots, Birthday shoot.
-</p>
-</section>
-
-<section id="admin">
-<h2>Admin Login</h2>
-
-<div id="loginBox">
-<input type="text" id="username" placeholder="Username"><br>
-<input type="password" id="password" placeholder="Password"><br><br>
-<button onclick="login()">Login</button>
-</div>
-
-<div id="adminPanel" style="display:none;">
-<h3>Upload Photos</h3>
-
-<select id="serviceSelect">
-<option value="pre">Pre Wedding</option>
-<option value="post">Post Wedding</option>
-<option value="outdoor">Outdoor</option>
-<option value="reels">Reels</option>
-<option value="maternity">Maternity</option>
-<option value="half">Half Saree</option>
-<option value="birthday">Birthday</option>
-</select><br><br>
-
-<input type="file" id="photoUpload" multiple accept="image/*"><br><br>
-<button onclick="uploadPhotos()">Upload</button>
-</div>
+<p>Professional photography services</p>
 </section>
 
 <section id="services">
 <h2>Our Services</h2>
 
 <div id="serviceCards">
-<div class="card" onclick="showService('pre')" style="background-image:url('https://st5.depositphotos.com/76654942/65177/v/450/depositphotos_651775488-stock-illustration-beautiful-young-bride-groom-wedding.jpg')">Pre Wedding</div>
-<div class="card" onclick="showService('post')" style="background-image:url('https://t3.ftcdn.net/jpg/09/20/17/10/360_F_920171021_in97VDu5GwziQkGFXqv0yWbuXFR8QtKK.jpg')">Post Wedding</div>
-<div class="card" onclick="showService('outdoor')" style="background-image:url('https://img.freepik.com/premium-vector/beach-portrait-style-wedding-cartoon-vector_961875-377048.jpg')">Outdoor</div>
-<div class="card" onclick="showService('reels')" style="background-image:url('https://thumbs.dreamstime.com/b/d-rendering-cartoon-smiley-popcorn-bucket-film-reel-yellow-background-d-rendering-cartoon-smiley-popcorn-bucket-149492032.jpg')">Reels</div>
-<div class="card" onclick="showService('maternity')" style="background-image:url('https://i.pinimg.com/736x/8e/d0/37/8ed03774b8edb50780b8d7a22fcf8e6b.jpg')">Maternity</div>
-<div class="card" onclick="showService('half')" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1iPlke2viALArK1d_-q280H4da9zaCLnHSA&s')">Half Saree</div>
-<div class="card" onclick="showService('birthday')" style="background-image:url('https://png.pngtree.com/background/20230614/original/pngtree-cartoon-boy-birthday-hd-images-picture-image_3470900.jpg')">Birthday</div>
+<div class="card" onclick="openService('pre')" style="background-image:url('https://st5.depositphotos.com/76654942/65177/v/450/depositphotos_651775488-stock-illustration-beautiful-young-bride-groom-wedding.jpg')">Pre Wedding</div>
+<div class="card" onclick="openService('post')" style="background-image:url('https://t3.ftcdn.net/jpg/09/20/17/10/360_F_920171021_in97VDu5GwziQkGFXqv0yWbuXFR8QtKK.jpg')">Post Wedding</div>
+<div class="card" onclick="openService('outdoor')" style="background-image:url('https://img.freepik.com/premium-vector/beach-portrait-style-wedding-cartoon-vector_961875-377048.jpg')">Outdoor</div>
+<div class="card" onclick="openService('reels')" style="background-image:url('https://thumbs.dreamstime.com/b/d-rendering-cartoon-smiley-popcorn-bucket-film-reel-yellow-background-149492032.jpg')">Reels</div>
+<div class="card" onclick="openService('maternity')" style="background-image:url('https://i.pinimg.com/736x/8e/d0/37/8ed03774b8edb50780b8d7a22fcf8e6b.jpg')">Maternity</div>
+<div class="card" onclick="openService('half')" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1iPlke2viALArK1d_-q280H4da9zaCLnHSA&s')">Half Saree</div>
+<div class="card" onclick="openService('birthday')" style="background-image:url('https://png.pngtree.com/background/20230614/original/pngtree-cartoon-boy-birthday-hd-images-picture-image_3470900.jpg')">Birthday</div>
 </div>
 
-<div id="pre" class="service-details"><h3>Pre Wedding</h3><div class="images"></div><button onclick="back()">Back</button></div>
-<div id="post" class="service-details"><h3>Post Wedding</h3><div class="images"></div><button onclick="back()">Back</button></div>
-<div id="outdoor" class="service-details"><h3>Outdoor</h3><div class="images"></div><button onclick="back()">Back</button></div>
-<div id="reels" class="service-details"><h3>Reels</h3><div class="images"></div><button onclick="back()">Back</button></div>
-<div id="maternity" class="service-details"><h3>Maternity</h3><div class="images"></div><button onclick="back()">Back</button></div>
-<div id="half" class="service-details"><h3>Half Saree</h3><div class="images"></div><button onclick="back()">Back</button></div>
-<div id="birthday" class="service-details"><h3>Birthday</h3><div class="images"></div><button onclick="back()">Back</button></div>
+<div id="pre" class="service-details"></div>
+<div id="post" class="service-details"></div>
+<div id="outdoor" class="service-details"></div>
+<div id="reels" class="service-details"></div>
+<div id="maternity" class="service-details"></div>
+<div id="half" class="service-details"></div>
+<div id="birthday" class="service-details"></div>
 
 </section>
 
+<!-- GALLERY -->
 <section id="gallery">
 <h2>Gallery</h2>
-<p>Service wise photos available</p>
+<div id="galleryImages"></div>
 </section>
 
 <section id="contact">
 <h2>Contact</h2>
-<p>mail-id: manojbadiganti122@gmail.com</p>
+<p>manojbadiganti122@gmail.com</p>
 <p>8019225206</p>
 </section>
 
 <script>
+let currentRole="";
+const services=["pre","post","outdoor","reels","maternity","half","birthday"];
+
+services.forEach(s=>{
+document.getElementById(s).innerHTML=`
+<h3>${s.toUpperCase()}</h3>
+<div class="images"></div>
+
+<div class="admin-only">
+<input type="file" multiple onchange="upload(this,'${s}')"><br><br>
+</div>
+
+<div class="user-only">
+<button onclick="alert('Booking Request Sent')">Book</button><br><br>
+</div>
+
+<button onclick="back()">Back</button>`;
+});
+
 function showPage(id){
 document.querySelectorAll("section").forEach(s=>s.style.display="none");
 document.getElementById(id).style.display="block";
+if(id==="gallery") loadGallery();
 back();
 }
 
-function login(){
-if(username.value==="admin" && password.value==="1234"){
-loginBox.style.display="none";
-adminPanel.style.display="block";
-alert("Admin Login Successful");
-}else{
-alert("Invalid Login");
-}
-}
-
-function uploadPhotos(){
-let files=photoUpload.files;
-let service=serviceSelect.value;
-let saved=JSON.parse(localStorage.getItem(service)||"[]");
-
-for(let f of files){
-let reader=new FileReader();
-reader.onload=e=>{
-saved.push(e.target.result);
-localStorage.setItem(service,JSON.stringify(saved));
-loadImages(service);
-};
-reader.readAsDataURL(f);
-}
+function doLogin(){
+currentRole = role.value;
+if(
+(currentRole==="admin" && username.value==="admin" && password.value==="1234") ||
+(currentRole==="user" && username.value==="user" && password.value==="1111")
+){
+loginPage.style.display="none";
+navbar.style.display="block";
+showPage("home");
+}else alert("Invalid Login");
 }
 
-function deletePhoto(service,index){
-let imgs=JSON.parse(localStorage.getItem(service)||"[]");
-imgs.splice(index,1);
-localStorage.setItem(service,JSON.stringify(imgs));
-loadImages(service);
-}
+function logout(){location.reload();}
 
-function loadImages(service){
-let box=document.querySelector("#"+service+" .images");
-box.innerHTML="";
-let imgs=JSON.parse(localStorage.getItem(service)||"[]");
-
-imgs.forEach((src,i)=>{
-let div=document.createElement("div");
-div.className="image-box";
-
-let img=document.createElement("img");
-img.src=src;
-
-let btn=document.createElement("button");
-btn.className="delete-btn";
-btn.innerHTML="❌";
-btn.onclick=()=>deletePhoto(service,i);
-
-div.appendChild(img);
-div.appendChild(btn);
-box.appendChild(div);
-});
-}
-
-function showService(service){
+function openService(s){
 serviceCards.style.display="none";
 document.querySelectorAll(".service-details").forEach(d=>d.style.display="none");
-document.getElementById(service).style.display="block";
-loadImages(service);
+document.getElementById(s).style.display="block";
+loadImages(s);
+
+document.querySelectorAll(".admin-only").forEach(a=>a.style.display=currentRole==="admin"?"block":"none");
+document.querySelectorAll(".user-only").forEach(u=>u.style.display=currentRole==="user"?"block":"none");
 }
 
 function back(){
@@ -264,7 +213,62 @@ serviceCards.style.display="block";
 document.querySelectorAll(".service-details").forEach(d=>d.style.display="none");
 }
 
-showPage('home');
+function upload(input,s){
+if(currentRole!=="admin") return;
+let imgs=JSON.parse(localStorage.getItem(s)||"[]");
+[...input.files].forEach(f=>{
+let r=new FileReader();
+r.onload=e=>{
+imgs.push(e.target.result);
+localStorage.setItem(s,JSON.stringify(imgs));
+loadImages(s);
+};
+r.readAsDataURL(f);
+});
+}
+
+function deleteImage(s,i){
+if(currentRole!=="admin") return;
+let imgs=JSON.parse(localStorage.getItem(s)||"[]");
+imgs.splice(i,1);
+localStorage.setItem(s,JSON.stringify(imgs));
+loadImages(s);
+}
+
+function loadImages(s){
+let box=document.querySelector("#"+s+" .images");
+box.innerHTML="";
+let imgs=JSON.parse(localStorage.getItem(s)||"[]");
+imgs.forEach((src,i)=>{
+let div=document.createElement("div");
+div.className="image-box";
+let img=document.createElement("img");
+img.src=src;
+div.appendChild(img);
+if(currentRole==="admin"){
+let b=document.createElement("button");
+b.className="delete-btn";
+b.innerText="❌";
+b.onclick=()=>deleteImage(s,i);
+div.appendChild(b);
+}
+box.appendChild(div);
+});
+}
+
+function loadGallery(){
+galleryImages.innerHTML="";
+services.forEach(s=>{
+let imgs=JSON.parse(localStorage.getItem(s)||"[]");
+imgs.forEach(src=>{
+let img=document.createElement("img");
+img.src=src;
+galleryImages.appendChild(img);
+});
+});
+}
+
+showPage("loginPage");
 </script>
 
 </body>
